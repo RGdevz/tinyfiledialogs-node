@@ -1,0 +1,51 @@
+{
+  "name": "tinyfiledialogs-node",
+  "version": "1.1.7",
+  "description": "A Node.js native addon for file dialogs using tinyfiledialogs.",
+  "main": "./dist/index.cjs",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "module": "./dist/index.js",
+  "types": "index.d.ts",
+  "type": "module",
+  "scripts": {
+    "tsc": "tsup && cpx ./prebuilt/** ./dist",
+    "test": "node test.js",
+    "vs": "xmake project -k vsxmake -a x64"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rgdevz/tinyfiledialogs-node.git"
+  },
+  "keywords": [
+    "tinyfiledialogs",
+    "file-dialog",
+    "native-addon",
+    "node-addon",
+    "napi"
+  ],
+  "author": "RGDev",
+  "license": "Zlib",
+  "bugs": {
+    "url": "https://github.com/rgdevz/tinyfiledialogs-node/issues"
+  },
+  "homepage": "https://github.com/rgdevz/tinyfiledialogs-node",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "cpx": "^1.5.0",
+    "node-addon-api": "^8.3.0",
+    "node-api-headers": "^1.5.0",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
+  }
+}

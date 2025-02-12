@@ -1,0 +1,9 @@
+/build
+/node_modules
+/.xmake
+/vsxmake2022
+/.idea
+_reset.bat
+/prebuilt
+/dist
+/_dist

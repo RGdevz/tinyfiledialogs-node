@@ -1,0 +1,44 @@
+name: build-addon
+
+on:
+  workflow_dispatch:
+
+env:
+  BUILD_PATH: "build/Release/tinyfiledialogs-node.node"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-20.04, ubuntu-arm64,macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout addon repository
+        uses: actions/checkout@v4
+        with:
+          repository: "RGdevz/tinyfiledialogs-node"
+          path: addon-src
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          cd addon-src
+          npm install
+
+      - name: Build addon
+        run: |
+          cd addon-src
+          npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tinyfiledialogs-node-${{ matrix.os }}
+          path: addon-src/${{ env.BUILD_PATH }}
