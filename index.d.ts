@@ -8,7 +8,7 @@ declare module 'tinyfiledialogs-node' {
 
     /**
      * Opens a file picker dialog and returns the selected file path.
-     * @returns The selected file path or null if canceled.
+     * @returns The selected files path or [] if canceled.
      */
     function pickFile(filters?: string[], allowMultiple?: boolean): string[];
 

@@ -3,23 +3,18 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
  entry: [
- './js/index.ts'
+ './js/index.cjs'
  ],
 
 
  banner: ({ format, platform }) => {
   if (format === "esm") {
-   return {
-    js: `import { createRequire } from 'node:module';
-      if (typeof require === 'undefined') {
-        globalThis.require = createRequire(import.meta.url);
-      }
-      if (typeof __filename === 'undefined') {
-        globalThis.__filename = require('node:url').fileURLToPath(import.meta.url);
-      }
-      if (typeof __dirname === 'undefined') {
-        globalThis.__dirname = require('node:path').dirname(__filename);
-      }`,
+ return {
+ js: `import { createRequire } from 'node:module';
+ if (typeof require === 'undefined') {
+ globalThis.require = createRequire(import.meta.url);
+ }
+ `,
    };
   }
   return {};
@@ -28,6 +23,7 @@ export default defineConfig({
  format: ['cjs', 'esm'],
  target: 'node16',
  splitting: false,
+ shims:true,
  outDir:'dist',
  cjsInterop: true,
  minify:false,

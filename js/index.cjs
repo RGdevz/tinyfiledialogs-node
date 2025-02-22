@@ -1,19 +1,25 @@
-import {loadAddon} from "./loadAddon";
+const {loadAddon} = require('./loadAddon.cjs')
 
 const addonName = `tinyfiledialogs-node-${process.platform}-${process.arch}.node`
 const mod = loadAddon(addonName, [__dirname])
 
 function pickFile(filters, allowMultiple) {
 	if (Array.isArray(filters)) {
-		filters = filters.filter(x => typeof x == 'string')
-		.map(f => f.startsWith('*.') ? f : `*.${f}`)
+	filters = filters.filter(x => typeof x == 'string')
+	.map(f => f.startsWith('*.') ? f : `*.${f}`)
 	}
 	return mod.pickFile(filters, allowMultiple)
 }
 
-function popup(title: string, msg: string) {
+function popup(title, msg) {
 	mod.popup(title || 'Alert', String(msg || 'Empty'));
 }
 
-const {pickFolder, inputBox, saveFileDialog} = mod
-export {pickFolder, inputBox, saveFileDialog, pickFile, popup}
+module.exports = {
+	pickFolder : mod.pickFolder,
+	inputBox : mod.inputBox,
+	saveFileDialog:mod.saveFileDialog,
+	pickFile,
+	popup
+
+}

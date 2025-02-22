@@ -1,6 +1,6 @@
 {
   "name": "tinyfiledialogs-node",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A Node.js native addon for file dialogs using tinyfiledialogs.",
   "main": "./dist/index.cjs",
   "files": [
@@ -8,15 +8,19 @@
     "index.d.ts"
   ],
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  }
   },
+
   "module": "./dist/index.js",
   "types": "index.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "tsc": "tsup && cpx ./prebuilt/** ./dist",
-    "test": "node test.js",
+    "test": "node wow/test.js",
+    "build": "npm rebuild",
     "vs": "xmake project -k vsxmake -a x64"
   },
   "repository": {
